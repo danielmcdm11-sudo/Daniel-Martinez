@@ -1,56 +1,106 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <title>Para Ti ❤️</title>
-    <style>
-        body {
-            background: linear-gradient(pink, hotpink);
-            text-align: center;
-            font-family: Arial;
-            color: white;
-            padding-top: 60px;
-        }
+<meta charset="UTF-8">
+<title>Para Ti ❤️</title>
 
-        h1 {
-            font-size: 50px;
-        }
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(#ff5f9e, #ff1c68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial;
+    color: white;
+    overflow: hidden;
+}
 
-        p {
-            font-size: 22px;
-        }
+h1 {
+    font-size: 48px;
+    animation: aparecer 2s;
+}
 
-        button {
-            padding: 15px 30px;
-            font-size: 20px;
-            border-radius: 15px;
-            border: none;
-            background: red;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
+p {
+    font-size: 22px;
+    max-width: 600px;
+    text-align: center;
+}
+
+button {
+    padding: 15px 35px;
+    border-radius: 20px;
+    border: none;
+    background: white;
+    color: hotpink;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@keyframes aparecer {
+    from {opacity:0; transform:scale(0.5);}
+    to {opacity:1; transform:scale(1);}
+}
+
+.heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: subir 6s linear infinite;
+}
+
+@keyframes subir {
+    from {bottom:-10px;}
+    to {bottom:110%;}
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Feliz 14 de Febrero ❤️</h1>
+<h1>Feliz San Valentín ❤️</h1>
 
-    <p>
-        Amor, solo quería decirte que eres lo mejor que me ha pasado.<br />
-        Gracias por estar conmigo 💕
-    </p>
+<p id="texto"></p>
 
-    <button onclick="mostrar()">Presiona aquí</button>
+<button onclick="mostrar()">Toca aquí amor 💖</button>
 
-    <p id="mensaje"></p>
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
 
-    <script>
-        function mostrar() {
-            document.getElementById("mensaje").innerHTML =
-                "Te amo muchísimo 😘🌹";
-        }
-    </script>
+<script>
+
+let mensaje = "Amor... quiero que sepas que eres mi persona favorita, mi felicidad diaria y mi lugar seguro. Gracias por existir y por llenar mi vida de sonrisas. Te amo más de lo que puedo explicar ❤️🌹";
+let i = 0;
+
+function escribir() {
+    if(i < mensaje.length){
+        document.getElementById("texto").innerHTML += mensaje.charAt(i);
+        i++;
+        setTimeout(escribir, 50);
+    }
+}
+
+escribir();
+
+function mostrar(){
+    alert("Eres el amor de mi vida 😘");
+}
+
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},6000);
+},300);
+
+</script>
 
 </body>
 </html>
