@@ -5,67 +5,64 @@
 <title>Para Ti ❤️</title>
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(#ff5f9e, #ff1c68);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: Arial;
-    color: white;
-    overflow: hidden;
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(#ff4b8b,#ff004c);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+overflow:hidden;
+color:white;
 }
 
-h1 {
-    font-size: 48px;
-    animation: aparecer 2s;
+h1{font-size:45px;}
+p{font-size:22px;}
+
+button{
+padding:15px 30px;
+font-size:20px;
+border:none;
+border-radius:20px;
+cursor:pointer;
 }
 
-p {
-    font-size: 22px;
-    max-width: 600px;
-    text-align: center;
+#si{
+background:white;
+color:hotpink;
 }
 
-button {
-    padding: 15px 35px;
-    border-radius: 20px;
-    border: none;
-    background: white;
-    color: hotpink;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 20px;
+#no{
+background:black;
+color:white;
+position:absolute;
 }
 
-@keyframes aparecer {
-    from {opacity:0; transform:scale(0.5);}
-    to {opacity:1; transform:scale(1);}
+.heart{
+position:absolute;
+font-size:20px;
+animation:subir 6s linear infinite;
 }
 
-.heart {
-    position: absolute;
-    color: pink;
-    font-size: 20px;
-    animation: subir 6s linear infinite;
-}
-
-@keyframes subir {
-    from {bottom:-10px;}
-    to {bottom:110%;}
+@keyframes subir{
+from{bottom:-20px;}
+to{bottom:110%;}
 }
 </style>
 </head>
 
 <body>
 
-<h1>Feliz San Valentín ❤️</h1>
+<h1>💖 ¿Quieres salir a comer conmigo? 💖</h1>
 
-<p id="texto"></p>
+<div>
+<button id="si" onclick="aceptar()">SÍ 😍</button>
+<button id="no" onmouseover="mover()">NO 😅</button>
+</div>
 
-<button onclick="mostrar()">Toca aquí amor 💖</button>
+<p id="mensaje"></p>
 
 <audio autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
@@ -73,31 +70,27 @@ button {
 
 <script>
 
-let mensaje = "Amor... quiero que sepas que eres mi persona favorita, mi felicidad diaria y mi lugar seguro. Gracias por existir y por llenar mi vida de sonrisas. Te amo más de lo que puedo explicar ❤️🌹";
-let i = 0;
+function mover(){
+let x=Math.random()*(window.innerWidth-100);
+let y=Math.random()*(window.innerHeight-50);
 
-function escribir() {
-    if(i < mensaje.length){
-        document.getElementById("texto").innerHTML += mensaje.charAt(i);
-        i++;
-        setTimeout(escribir, 50);
-    }
+document.getElementById("no").style.left=x+"px";
+document.getElementById("no").style.top=y+"px";
 }
 
-escribir();
-
-function mostrar(){
-    alert("Eres el amor de mi vida 😘");
+function aceptar(){
+document.body.innerHTML=
+"<h1>😍 SABÍA QUE DIRÍAS QUE SÍ 😍</h1>"+
+"<p>Eres el amor de mi vida ❤️ Gracias por hacerme feliz todos los días 🌹</p>";
 }
 
-setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{heart.remove();},6000);
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
 },300);
 
 </script>
