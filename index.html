@@ -2,46 +2,72 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Ti ❤️</title>
+
+<title>Feliz San Valentín ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(#ff4b8b,#ff0055);
+background:radial-gradient(circle at top,#ff9ec7,#ff2566);
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-font-family:Arial;
+font-family:'Poppins',sans-serif;
 overflow:hidden;
 color:white;
 text-align:center;
 }
 
-h1{font-size:45px;}
-p{font-size:22px;max-width:600px;}
-
-button{
-padding:15px 30px;
-font-size:20px;
-border:none;
-border-radius:20px;
-cursor:pointer;
+h1{
+font-family:'Pacifico',cursive;
+font-size:55px;
+text-shadow:0 0 15px pink;
+animation:zoom 2s;
 }
 
-#si{background:white;color:hotpink;}
-#no{background:black;color:white;position:absolute;}
+p{font-size:22px;max-width:600px;}
+
+h2{margin-top:20px;}
+
+button{
+padding:15px 35px;
+font-size:22px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+box-shadow:0 0 15px rgba(255,255,255,.5);
+}
+
+#si{
+background:white;
+color:#ff2566;
+position:absolute;
+}
+
+#no{
+background:black;
+color:white;
+position:absolute;
+}
+
+@keyframes zoom{
+from{transform:scale(.2);opacity:0}
+to{transform:scale(1);opacity:1}
+}
 
 .heart{
 position:absolute;
-font-size:20px;
-animation:subir 6s linear infinite;
+font-size:22px;
+animation:subir 7s linear infinite;
 }
 
 @keyframes subir{
-from{bottom:-20px;}
-to{bottom:110%;}
+from{bottom:-30px;opacity:1}
+to{bottom:110%;opacity:0}
 }
 </style>
 </head>
@@ -50,17 +76,12 @@ to{bottom:110%;}
 
 <h1>💖 Feliz Día de San Valentín 💖</h1>
 
-<p>
-Amor, quería decirte que eres lo más bonito que me ha pasado.
-Gracias por llenar mi vida de alegría y sonrisas ❤️
-</p>
+<p id="texto"></p>
 
 <h2>¿Quieres salir a comer conmigo? 😍</h2>
 
-<div>
 <button id="si" onmouseover="moverSi()">SÍ 💕</button>
 <button id="no" onmouseover="moverNo()">NO 😅</button>
-</div>
 
 <audio autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
@@ -68,24 +89,34 @@ Gracias por llenar mi vida de alegría y sonrisas ❤️
 
 <script>
 
-let intentos = 0;
+let mensaje="Amor... quiero que sepas que eres lo más bonito que me ha pasado. Gracias por existir, por tus sonrisas, por tu cariño y por hacer mis días más felices. Te amo muchísimo ❤️";
+let i=0;
 
-function moverNo(){
-mover("no");
+function escribir(){
+if(i<mensaje.length){
+document.getElementById("texto").innerHTML+=mensaje.charAt(i);
+i++;
+setTimeout(escribir,45);
 }
+}
+escribir();
+
+let intentos=0;
+
+function moverNo(){mover("no");}
 
 function moverSi(){
-if(intentos < 10){
+if(intentos<10){
 mover("si");
 intentos++;
 }else{
-document.getElementById("si").onclick = aceptar;
+document.getElementById("si").onclick=aceptar;
 }
 }
 
 function mover(id){
-let x=Math.random()*(window.innerWidth-120);
-let y=Math.random()*(window.innerHeight-60);
+let x=Math.random()*(window.innerWidth-150);
+let y=Math.random()*(window.innerHeight-80);
 document.getElementById(id).style.left=x+"px";
 document.getElementById(id).style.top=y+"px";
 }
@@ -93,7 +124,7 @@ document.getElementById(id).style.top=y+"px";
 function aceptar(){
 document.body.innerHTML=
 "<h1>😍 SABÍA QUE DIRÍAS QUE SÍ 😍</h1>"+
-"<p>Alístate rápido amor ❤️🌹<br>Te amo muchísimo y gracias por hacerme tan feliz.</p>";
+"<p style='font-size:25px'>Alístate rápido amor ❤️🌹<br><br>Te amo muchísimo y gracias por hacerme tan feliz.</p>";
 }
 
 setInterval(()=>{
@@ -102,8 +133,8 @@ h.className="heart";
 h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},300);
+setTimeout(()=>h.remove(),7000);
+},250);
 
 </script>
 
