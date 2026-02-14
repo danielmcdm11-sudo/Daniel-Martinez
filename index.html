@@ -8,7 +8,7 @@
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(#ff4b8b,#ff004c);
+background:linear-gradient(#ff4b8b,#ff0055);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -16,10 +16,11 @@ align-items:center;
 font-family:Arial;
 overflow:hidden;
 color:white;
+text-align:center;
 }
 
 h1{font-size:45px;}
-p{font-size:22px;}
+p{font-size:22px;max-width:600px;}
 
 button{
 padding:15px 30px;
@@ -29,16 +30,8 @@ border-radius:20px;
 cursor:pointer;
 }
 
-#si{
-background:white;
-color:hotpink;
-}
-
-#no{
-background:black;
-color:white;
-position:absolute;
-}
+#si{background:white;color:hotpink;}
+#no{background:black;color:white;position:absolute;}
 
 .heart{
 position:absolute;
@@ -55,14 +48,19 @@ to{bottom:110%;}
 
 <body>
 
-<h1>💖 ¿Quieres salir a comer conmigo? 💖</h1>
+<h1>💖 Feliz Día de San Valentín 💖</h1>
+
+<p>
+Amor, quería decirte que eres lo más bonito que me ha pasado.
+Gracias por llenar mi vida de alegría y sonrisas ❤️
+</p>
+
+<h2>¿Quieres salir a comer conmigo? 😍</h2>
 
 <div>
-<button id="si" onclick="aceptar()">SÍ 😍</button>
-<button id="no" onmouseover="mover()">NO 😅</button>
+<button id="si" onmouseover="moverSi()">SÍ 💕</button>
+<button id="no" onmouseover="moverNo()">NO 😅</button>
 </div>
-
-<p id="mensaje"></p>
 
 <audio autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
@@ -70,18 +68,32 @@ to{bottom:110%;}
 
 <script>
 
-function mover(){
-let x=Math.random()*(window.innerWidth-100);
-let y=Math.random()*(window.innerHeight-50);
+let intentos = 0;
 
-document.getElementById("no").style.left=x+"px";
-document.getElementById("no").style.top=y+"px";
+function moverNo(){
+mover("no");
+}
+
+function moverSi(){
+if(intentos < 10){
+mover("si");
+intentos++;
+}else{
+document.getElementById("si").onclick = aceptar;
+}
+}
+
+function mover(id){
+let x=Math.random()*(window.innerWidth-120);
+let y=Math.random()*(window.innerHeight-60);
+document.getElementById(id).style.left=x+"px";
+document.getElementById(id).style.top=y+"px";
 }
 
 function aceptar(){
 document.body.innerHTML=
 "<h1>😍 SABÍA QUE DIRÍAS QUE SÍ 😍</h1>"+
-"<p>Eres el amor de mi vida ❤️ Gracias por hacerme feliz todos los días 🌹</p>";
+"<p>Alístate rápido amor ❤️🌹<br>Te amo muchísimo y gracias por hacerme tan feliz.</p>";
 }
 
 setInterval(()=>{
