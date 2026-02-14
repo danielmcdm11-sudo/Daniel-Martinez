@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Para Ti ❤️</title>
+    <style>
+        body {
+            background: linear-gradient(pink, hotpink);
+            text-align: center;
+            font-family: Arial;
+            color: white;
+            padding-top: 60px;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        p {
+            font-size: 22px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 15px;
+            border: none;
+            background: red;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Feliz 14 de Febrero ❤️</h1>
+
+    <p>
+        Amor, solo quería decirte que eres lo mejor que me ha pasado.<br />
+        Gracias por estar conmigo 💕
+    </p>
+
+    <button onclick="mostrar()">Presiona aquí</button>
+
+    <p id="mensaje"></p>
+
+    <script>
+        function mostrar() {
+            document.getElementById("mensaje").innerHTML =
+                "Te amo muchísimo 😘🌹";
+        }
+    </script>
+
+</body>
+</html>
