@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+
 <title>Feliz San Valentín ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
@@ -10,7 +11,7 @@
 body{
 margin:0;
 height:100vh;
-background:radial-gradient(circle at top,#ff9ec7,#ff2566);
+background:linear-gradient(#ff7eb3,#ff2e63);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -23,62 +24,33 @@ text-align:center;
 
 h1{
 font-family:'Pacifico',cursive;
-font-size:55px;
-text-shadow:0 0 15px pink;
-animation:zoom 2s;
+font-size:50px;
+text-shadow:0 0 10px pink;
 }
 
 p{font-size:22px;max-width:600px;}
 
 button{
-padding:15px 35px;
+padding:15px 30px;
 font-size:22px;
 border:none;
-border-radius:30px;
+border-radius:25px;
 cursor:pointer;
-box-shadow:0 0 15px rgba(255,255,255,.5);
+position:absolute;
 }
 
-#si{background:white;color:#ff2566;position:absolute;}
-#no{background:black;color:white;position:absolute;}
-
-@keyframes zoom{
-from{transform:scale(.2);opacity:0}
-to{transform:scale(1);opacity:1}
-}
+#si{background:white;color:#ff2e63;}
+#no{background:black;color:white;}
 
 .heart{
 position:absolute;
-font-size:22px;
-animation:subir 7s linear infinite;
+font-size:20px;
+animation:subir 6s linear infinite;
 }
 
 @keyframes subir{
-from{bottom:-30px;opacity:1}
-to{bottom:110%;opacity:0}
-}
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:caer 4s linear infinite;
-}
-
-@keyframes caer{
-from{top:-10px;}
-to{top:110%;}
-}
-
-.firework{
-position:absolute;
-font-size:30px;
-animation:explota 1s ease-out forwards;
-}
-
-@keyframes explota{
-from{transform:scale(.2);opacity:1}
-to{transform:scale(2);opacity:0}
+from{bottom:-20px;}
+to{bottom:110%;}
 }
 </style>
 </head>
@@ -91,8 +63,8 @@ to{transform:scale(2);opacity:0}
 
 <h2>¿Quieres salir a comer conmigo? 😍</h2>
 
-<button id="si" onmouseover="moverSi()">SÍ 💕</button>
-<button id="no" onmouseover="moverNo()">NO 😅</button>
+<button id="si">SÍ 💕</button>
+<button id="no">NO 😅</button>
 
 <audio autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
@@ -100,60 +72,57 @@ to{transform:scale(2);opacity:0}
 
 <script>
 
-let mensaje="Amor... quiero que sepas que eres lo más bonito que me ha pasado. Gracias por existir, por tus sonrisas y por hacer mis días más felices. Te amo muchísimo ❤️";
+let mensaje="Amor, eres lo más bonito que me ha pasado. Gracias por estar conmigo y hacer mis días más felices. Te amo muchísimo ❤️";
 let i=0;
 
 function escribir(){
 if(i<mensaje.length){
 document.getElementById("texto").innerHTML+=mensaje.charAt(i);
 i++;
-setTimeout(escribir,45);
+setTimeout(escribir,40);
 }
 }
 escribir();
 
+let si=document.getElementById("si");
+let no=document.getElementById("no");
 let intentos=0;
 
-function moverNo(){mover("no");}
+function mover(btn){
+btn.style.left=Math.random()*(window.innerWidth-120)+"px";
+btn.style.top=Math.random()*(window.innerHeight-60)+"px";
+}
 
-function moverSi(){
+no.addEventListener("mouseover",()=>mover(no));
+
+si.addEventListener("mouseover",()=>{
 if(intentos<10){
-mover("si");
+mover(si);
 intentos++;
 }else{
-document.getElementById("si").onclick=aceptar;
+si.onclick=final;
 }
-}
+});
 
-function mover(id){
-let x=Math.random()*(window.innerWidth-150);
-let y=Math.random()*(window.innerHeight-80);
-document.getElementById(id).style.left=x+"px";
-document.getElementById(id).style.top=y+"px";
-}
+function final(){
 
-function aceptar(){
-
-// vibración móvil
 if(navigator.vibrate){
-navigator.vibrate([200,100,200,100,300]);
+navigator.vibrate([200,100,200]);
 }
 
-// confetti
-for(let i=0;i<80;i++){
+for(let i=0;i<60;i++){
 let c=document.createElement("div");
-c.className="confetti";
+c.className="heart";
+c.innerHTML="🎉";
 c.style.left=Math.random()*100+"vw";
-c.style.background="hsl("+Math.random()*360+",100%,50%)";
 document.body.appendChild(c);
 setTimeout(()=>c.remove(),4000);
 }
 
-// fuegos artificiales
 for(let i=0;i<20;i++){
 let f=document.createElement("div");
-f.className="firework";
 f.innerHTML="🎆";
+f.style.position="absolute";
 f.style.left=Math.random()*100+"vw";
 f.style.top=Math.random()*100+"vh";
 document.body.appendChild(f);
@@ -162,18 +131,17 @@ setTimeout(()=>f.remove(),1000);
 
 document.body.innerHTML=
 "<h1>😍 SABÍA QUE DIRÍAS QUE SÍ 😍</h1>"+
-"<p style='font-size:25px'>Alístate rápido amor ❤️🌹<br><br>Te amo muchísimo y gracias por hacerme tan feliz.</p>";
+"<p>Alístate rápido amor ❤️🌹<br><br>Te amo muchísimo.</p>";
 }
 
-// corazones flotando
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),7000);
-},250);
+setTimeout(()=>h.remove(),6000);
+},300);
 
 </script>
 
