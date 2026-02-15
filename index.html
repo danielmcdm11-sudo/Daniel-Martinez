@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-
 <title>Feliz San Valentín ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
@@ -31,8 +30,6 @@ animation:zoom 2s;
 
 p{font-size:22px;max-width:600px;}
 
-h2{margin-top:20px;}
-
 button{
 padding:15px 35px;
 font-size:22px;
@@ -42,17 +39,8 @@ cursor:pointer;
 box-shadow:0 0 15px rgba(255,255,255,.5);
 }
 
-#si{
-background:white;
-color:#ff2566;
-position:absolute;
-}
-
-#no{
-background:black;
-color:white;
-position:absolute;
-}
+#si{background:white;color:#ff2566;position:absolute;}
+#no{background:black;color:white;position:absolute;}
 
 @keyframes zoom{
 from{transform:scale(.2);opacity:0}
@@ -68,6 +56,29 @@ animation:subir 7s linear infinite;
 @keyframes subir{
 from{bottom:-30px;opacity:1}
 to{bottom:110%;opacity:0}
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+animation:caer 4s linear infinite;
+}
+
+@keyframes caer{
+from{top:-10px;}
+to{top:110%;}
+}
+
+.firework{
+position:absolute;
+font-size:30px;
+animation:explota 1s ease-out forwards;
+}
+
+@keyframes explota{
+from{transform:scale(.2);opacity:1}
+to{transform:scale(2);opacity:0}
 }
 </style>
 </head>
@@ -89,7 +100,7 @@ to{bottom:110%;opacity:0}
 
 <script>
 
-let mensaje="Amor... quiero que sepas que eres lo más bonito que me ha pasado. Gracias por existir, por tus sonrisas, por tu cariño y por hacer mis días más felices. Te amo muchísimo ❤️";
+let mensaje="Amor... quiero que sepas que eres lo más bonito que me ha pasado. Gracias por existir, por tus sonrisas y por hacer mis días más felices. Te amo muchísimo ❤️";
 let i=0;
 
 function escribir(){
@@ -122,11 +133,39 @@ document.getElementById(id).style.top=y+"px";
 }
 
 function aceptar(){
+
+// vibración móvil
+if(navigator.vibrate){
+navigator.vibrate([200,100,200,100,300]);
+}
+
+// confetti
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background="hsl("+Math.random()*360+",100%,50%)";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),4000);
+}
+
+// fuegos artificiales
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="firework";
+f.innerHTML="🎆";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+}
+
 document.body.innerHTML=
 "<h1>😍 SABÍA QUE DIRÍAS QUE SÍ 😍</h1>"+
 "<p style='font-size:25px'>Alístate rápido amor ❤️🌹<br><br>Te amo muchísimo y gracias por hacerme tan feliz.</p>";
 }
 
+// corazones flotando
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
